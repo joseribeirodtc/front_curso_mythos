@@ -1,56 +1,19 @@
-import React, { useState } from "react";
-import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-function App() {
-  const [values, setValues] = useState();
-  console.log(values);
-  const handlerChangeValues = (value) => {
-    setValues((prevValue) => ({
-      ...prevValue,
-      [value.target.name]: value.target.value,
-    }));
-  };
+import Header from "./components/ui/Header";
+import Home from "./pages/home/Home";
+import Cursos from "./pages/cursos/Cursos";
+import Alunos from "./pages/alunos/Alunos";
 
-  const handlerClickButton = () => {
-    console.log(values);
-  };
-
+export default function App() {
   return (
-    <div className="app-container">
-      <div className="register-container">
-        <h1>Scrim Shop</h1>
-        <input
-          type="text"
-          name="name"
-          placeholder="Nome"
-          className="register-input"
-          onChange={handlerChangeValues}
-        />
-        <input
-          type="text"
-          name="cost"
-          placeholder="Preço"
-          className="register-input"
-          onChange={handlerChangeValues}
-        />
-        <input
-          type="text"
-          name="category"
-          placeholder="Categoria"
-          className="register-input"
-          onChange={handlerChangeValues}
-        />
-        <button
-          className="register-button"
-          onClick={() => {
-            handlerClickButton();
-          }}
-        >
-          Cadastrar
-        </button>
-      </div>
-    </div>
+    <Router>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/cursos" element={<Cursos />} />
+        <Route path="/alunos" element={<Alunos />} />
+      </Routes>
+    </Router>
   );
 }
-
-export default App;
